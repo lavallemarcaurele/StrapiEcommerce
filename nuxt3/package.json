@@ -1,0 +1,24 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/strapi": "^1.9.3",
+    "nuxt": "^3.7.3"
+  },
+  "dependencies": {
+    "@nuxt/image": "^0.7.1",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@unlok-co/nuxt-stripe": "^2.0.0",
+    "nuxt-icons": "^3.2.1",
+    "vee-validate": "^4.11.7"
+  }
+}
