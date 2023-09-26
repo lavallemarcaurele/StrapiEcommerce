@@ -32,8 +32,27 @@
       "required": true,
       "min": 0
     },
-    "date": {
-      "type": "datetime"
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "details": {
+      "type": "customField",
+      "options": {
+        "output": "Markdown",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    },
+    "item": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::item.item"
     }
   }
 }
