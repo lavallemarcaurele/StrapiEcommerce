@@ -33,14 +33,10 @@
       "min": 0
     },
     "description": {
-      "type": "text",
-      "required": false
-    },
-    "details": {
       "type": "customField",
       "options": {
         "output": "Markdown",
-        "preset": "light"
+        "preset": "standard"
       },
       "customField": "plugin::ckeditor.CKEditor"
     },

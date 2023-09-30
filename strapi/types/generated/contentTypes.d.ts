@@ -855,13 +855,12 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.SetMinMax<{
         min: 0;
       }>;
-    description: Attribute.Text;
-    details: Attribute.RichText &
+    description: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
         {
           output: 'Markdown';
-          preset: 'light';
+          preset: 'standard';
         }
       >;
     category: Attribute.Relation<
