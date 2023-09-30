@@ -5,17 +5,15 @@
     </NuxtLink>
     <nav class="space-x-4">
       <ul class="flex justify-center space-x-4">
-        <li v-for="category in categories" :key="category.name" class="relative"
-            @mouseover="category.isActive = true"
-            @mouseout="category.isActive = false">
+        <li v-for="category in categories" :key="category.name" class="relative" @mouseover="handleMouseOver(category)">
           <a class="hover:border-b cursor-pointer">
             {{ category.name }}
           </a>
-          <div :class="['fixed left-0 w-screen mt-2 bg-white transform transition-all duration-300 origin-top', 
-                        category.isActive ? 'h-[200px] opacity-100' : 'h-0 opacity-0']"
-               style="z-index: 10;">
-            <div :class="['flex justify-center items-center h-full transition-opacity duration-300', 
-                          category.isActive ? 'opacity-100' : 'opacity-0']">
+          <div v-if="category.isActive"
+            class="fixed left-0 w-screen mt-2 bg-white transform transition-all duration-300 origin-top h-0 opacity-0 z-10"
+            :class="category.isActive ? 'h-[200px] opacity-100' : ''">
+            <div class="flex justify-center items-center h-full transition-opacity duration-300 opacity-0"
+              :class="category.isActive ? 'opacity-100' : ''">
               <ul>
                 <li v-for="sub in category.sub_categories.data" :key="sub.attributes.name">
                   {{ sub.attributes.name }}
@@ -35,7 +33,31 @@ import { CategoryQuery } from '@/strapi/query/categoryQuery';
 
 const graphql = useStrapiGraphQL();
 const configuration = ref(null);
+
 const categories = ref([]);
+let activeMenu = ref(null);
+const props = defineProps<{ shouldCloseMenus: boolean }>();
+
+watch(() => props.shouldCloseMenus, (newVal) => {
+  if (newVal) {
+    closeAllMenus();
+  }
+});
+
+const closeAllMenus = () => {
+  categories.value.forEach(category => {
+    category.isActive = false;
+  });
+  activeMenu.value = null;
+};
+
+const handleMouseOver = (category) => {
+  if (activeMenu.value) {
+    activeMenu.value.isActive = false;
+  }
+  category.isActive = true;
+  activeMenu.value = category;
+};
 
 const fetchConfig = async () => {
   const { data } = await graphql(LogoQuery);
@@ -55,12 +77,6 @@ const logoUrl = ref('');
 
 onMounted(() => {
   fetchConfig();
-  fetchCategories().then(() => {
-    categories.value.forEach(cat => cat.isActive = false);
-  });
+  fetchCategories();
 });
 </script>
-
-<style>
-
-</style>
