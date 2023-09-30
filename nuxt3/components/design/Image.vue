@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <img :src="fullImageUrl" alt=""/>
-    </div>
+    <img :src="fullImageUrl" alt=""/>
 </template>
   
 <script setup lang="ts">
