@@ -6,33 +6,20 @@
   </template>
   
   <script setup lang="ts">
-  import { HERO1_GRAPHQL_QUERY } from '~/components/sections/Hero1/Hero1Query'
+  import { HomePageQuery } from '@/strapi/query/homepageQuery';
   
-  const graphql = useStrapiGraphQL()
-  const result = ref(null)
+  const graphql = useStrapiGraphQL();
+  const result = ref(null);
   
   async function fetchData() {
-  try {
-    const response = await graphql(`
-      query HomePageQuery {
-        homepage {
-          data {
-            attributes {
-              sections {
-                __typename
-                ${HERO1_GRAPHQL_QUERY}
-              }
-            }
-          }
-        }
-      }
-    `);
-    result.value = response.data.homepage;
+    try {
+      const response = await graphql(HomePageQuery);
+      result.value = response.data.homepage;
     } catch (error) {
-    console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error);
+    }
   }
-}
-
-fetchData();
-
-  </script>  
+  
+  fetchData();
+  </script>
+  

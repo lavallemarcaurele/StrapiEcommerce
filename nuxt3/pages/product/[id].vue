@@ -5,11 +5,11 @@
       <div v-if="product" class="flex justify-around">
         <div class="w-1/2 pr-8">
           <div>
-            <img :src="`${baseURL}${product?.images.data[0].attributes.url}`" alt="" class="rounded-xl" />
+            <DesignImage :url="product?.images.data[0].attributes.url" class="rounded-xl" />
           </div>
           <div class="flex space-x-4 mt-4">
             <div v-for="imageData in product?.images.data" :key="imageData.attributes.url">
-              <img :src="`${baseURL}${imageData.attributes.url}`" alt="" class="w-14 h-14 object-cover rounded-xl" />
+              <DesignImage :url="imageData.attributes.url" class="w-14 h-14 object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -38,54 +38,22 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-const graphql = useStrapiGraphQL()
-const product = ref(null)
+import { FetchProduct } from '@/strapi/query/productQuery';
+import { ProductType } from '@/strapi/types/ProductType';
 
-const baseURL = "http://localhost:1337";
+const route = useRoute();
+const graphql = useStrapiGraphQL();
+const product = ref<ProductType | null>(null);
 
-const fetchProduct = async (id) => {
-  const { data } = await graphql(`
-    query {
-      product(id: "${id}") {
-        data {
-          attributes {
-            suptitle
-            name
-            price
-            description
-            images {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-            category {
-              data {
-                attributes {
-                  name
-                }
-              }
-            }
-            item {
-              data {
-                attributes {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-  product.value = data.product.data.attributes
-}
-
+const fetchProduct = async (id: string) => {
+  const { data } = await graphql(FetchProduct, { id });
+  if (data.product.data) {
+    product.value = data.product.data.attributes as ProductType;
+  }
+};
 onMounted(() => {
   if (route.params.id) {
-    fetchProduct(route.params.id)
+    fetchProduct(route.params.id);
   }
-})
+});
 </script>

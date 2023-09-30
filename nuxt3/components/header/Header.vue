@@ -1,13 +1,12 @@
 <template>
     <header>
         <HeaderSup/>
-        <Navigation/>
-        <Banner/>
+        <HeaderNavigation/>
+        <HeaderBanner/>
     </header>
 </template>
 
 <script setup lang="ts">
-import Navigation from './Navigation.vue';
-import Banner from './Banner.vue';
+
 
 </script>

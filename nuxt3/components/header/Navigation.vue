@@ -1,52 +1,29 @@
 <template>
   <div class="h-[60px] flex items-center">
     <NuxtLink to="/" class="ml-10">
-      <img :src="logoUrl" alt="" class="w-14" />
+      <DesignImage :url="logoUrl" class="w-14" />
     </NuxtLink>
   </div>
 </template>
 
 <script setup lang="ts">
-const graphql = useStrapiGraphQL();
-const config = ref(null);
+import { LogoQuery } from '@/strapi/query/logoQuery';
 
-const baseURL = "http://localhost:1337";
+const graphql = useStrapiGraphQL();
+const configuration = ref(null);
 
 const fetchConfig = async () => {
-  const { data } = await graphql(`
-    query {
-      configuration {
-        data {
-          attributes {
-            logo {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
-  config.value = data.configuration.data.attributes;
+  const { data } = await graphql(LogoQuery);
+  configuration.value = data.configuration.data.attributes;
+  
+  if (configuration.value?.logo?.data?.attributes?.url) {
+    logoUrl.value = configuration.value.logo.data.attributes.url;
+  }
 };
+
+const logoUrl = ref('');
 
 onMounted(() => {
   fetchConfig();
 });
-
-const logoUrl = ref('');
-
-watch(
-  () => config.value,
-  (newConfig) => {
-    if (newConfig && newConfig.logo && newConfig.logo.data && newConfig.logo.data.attributes) {
-      logoUrl.value = `${baseURL}${newConfig.logo.data.attributes.url}`;
-    }
-  },
-  { immediate: true }
-);
-
 </script>
