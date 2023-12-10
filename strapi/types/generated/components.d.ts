@@ -76,7 +76,7 @@ export interface UtilsButton extends Schema.Component {
   };
 }
 
-declare module '@strapi/strapi' {
+declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'hero.hero-1': HeroHero1;
