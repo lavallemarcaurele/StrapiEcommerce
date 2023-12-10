@@ -33,3 +33,40 @@ query FetchProduct($id: ID!) {
   }
 }
 `;
+
+export const FetchAllProducts = `
+query FetchAllProducts {
+  products {
+    data {
+      id
+      attributes {
+        suptitle
+        name
+        price
+        description
+        images {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        category {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        item {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
