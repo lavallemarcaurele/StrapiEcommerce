@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import { ProductType } from '@/strapi/types/ProductType';
+import type { ProductType } from '@/strapi/types/ProductType';
 
 const props = defineProps({
   product: {

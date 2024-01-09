@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { FetchAllProducts } from '@/strapi/query/productQuery';
-import { ProductType } from '@/strapi/types/ProductType';
+import type { ProductType } from '@/strapi/types/ProductType';
 
 const products = ref<ProductType[]>([]);
 const graphql = useStrapiGraphQL();

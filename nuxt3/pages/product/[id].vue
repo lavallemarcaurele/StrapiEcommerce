@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { FetchProduct } from '@/strapi/query/productQuery';
-import { ProductType } from '@/strapi/types/ProductType';
+import type { ProductType } from '@/strapi/types/ProductType';
 
 const route = useRoute();
 const graphql = useStrapiGraphQL();
