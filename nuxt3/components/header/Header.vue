@@ -7,8 +7,8 @@
   </template>
   
 <script setup lang="ts">
-const { isMobile, isDesktop } = useDevice();
-const shouldCloseMenus = ref(false);
+const { isDesktop } = useDevice();
+const shouldCloseMenus = ref<boolean>(false);
 
 const closeAllMenus = () => {
   shouldCloseMenus.value = true;
