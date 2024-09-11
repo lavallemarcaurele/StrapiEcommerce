@@ -1,13 +1,11 @@
 <template>
   <header @mouseleave="closeAllMenus">
-    <HeaderSup v-if="isDesktop" />
     <HeaderNavigation :should-close-menus="shouldCloseMenus" />
     <HeaderBanner />
   </header>
 </template>
 
 <script setup lang="ts">
-const { isDesktop } = useDevice()
 const shouldCloseMenus = ref<boolean>(false)
 
 const closeAllMenus = () => {
