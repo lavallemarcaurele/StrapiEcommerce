@@ -32,7 +32,7 @@ query FetchProduct($id: ID!) {
     }
   }
 }
-`;
+`
 
 export const FetchAllProducts = `
 query FetchAllProducts {
@@ -69,4 +69,4 @@ query FetchAllProducts {
     }
   }
 }
-`;
+`

@@ -14,4 +14,3 @@ export interface ProductType {
       data: { attributes: { name: string } };
     };
   }
-  

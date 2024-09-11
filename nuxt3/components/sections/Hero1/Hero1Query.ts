@@ -14,4 +14,4 @@ export const HERO1_GRAPHQL_QUERY = `
         }
     }
   }
-`;
+`

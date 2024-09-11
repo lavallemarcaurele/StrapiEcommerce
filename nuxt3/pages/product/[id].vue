@@ -2,15 +2,23 @@
   <div class="flex justify-center">
     <div class="main-container">
 
-      <div v-if="product" class="flex flex-col md:flex-row justify-around">
+      <div
+        v-if="product"
+        class="flex flex-col md:flex-row justify-around">
 
         <div class="w-full md:w-1/2 md:pr-8 mb-10">
           <div>
-            <DesignImage :url="product?.images.data[0].attributes.url" class="rounded-xl" />
+            <DesignImage
+              :url="product?.images.data[0].attributes.url"
+              class="rounded-xl" />
           </div>
           <div class="flex space-x-4 mt-4">
-            <div v-for="imageData in product?.images.data" :key="imageData.attributes.url">
-              <DesignImage :url="imageData.attributes.url" class="w-14 h-14 object-cover rounded-xl" />
+            <div
+              v-for="imageData in product?.images.data"
+              :key="imageData.attributes.url">
+              <DesignImage
+                :url="imageData.attributes.url"
+                class="w-14 h-14 object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -35,22 +43,22 @@
 </template>
 
 <script setup lang="ts">
-import { FetchProduct } from '@/strapi/query/productQuery';
-import type { ProductType } from '@/strapi/types/ProductType';
+import { FetchProduct } from '@/strapi/query/productQuery'
+import type { ProductType } from '@/strapi/types/ProductType'
 
-const route = useRoute();
-const graphql = useStrapiGraphQL();
-const product = ref<ProductType | null>(null);
+const route = useRoute()
+const graphql = useStrapiGraphQL()
+const product = ref<ProductType | null>(null)
 
 const fetchProduct = async (id: string) => {
-  const { data } = await graphql(FetchProduct, { id });
+  const { data } = await graphql(FetchProduct, { id })
   if (data.product.data) {
-    product.value = data.product.data.attributes as ProductType;
+    product.value = data.product.data.attributes as ProductType
   }
-};
+}
 onMounted(() => {
   if (route.params.id) {
-    fetchProduct(route.params.id);
+    fetchProduct(route.params.id)
   }
-});
+})
 </script>
