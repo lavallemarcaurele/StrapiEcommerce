@@ -49,6 +49,7 @@ const configuration = ref(null)
 const categories = ref<Array>([])
 const activeMenu = ref(null)
 const props = defineProps<{ shouldCloseMenus: boolean }>()
+const logoUrl = ref<string>('')
 
 watch(() => props.shouldCloseMenus, (newVal) => {
   if (newVal) {
@@ -84,8 +85,6 @@ const fetchCategories = async () => {
   const { data } = await graphql(CategoryQuery)
   categories.value = data.categories.data.map(cat => cat.attributes)
 }
-
-const logoUrl = ref('')
 
 onMounted(() => {
   fetchConfig()

@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/device',
     '@nuxt/eslint',
+    '@nuxt/image',
   ],
 
   i18n: {

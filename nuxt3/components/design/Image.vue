@@ -1,7 +1,7 @@
 <template>
-  <img
+  <NuxtImg
     :src="fullImageUrl"
-    alt="">
+    alt=""/>
 </template>
 
 <script setup lang="ts">

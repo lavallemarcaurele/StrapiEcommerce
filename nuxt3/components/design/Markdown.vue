@@ -28,7 +28,6 @@ function simpleMarkdownToHtml(markdown: string) {
 
   html = html.replace(/\n/g, '<br>')
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-
   html = html.replace(/\* ([^*]+)/g, '<li>$1</li>')
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
   html = html.replace(/((?:\|[^\|\n]+\|?\n)+)/g, (match) => {

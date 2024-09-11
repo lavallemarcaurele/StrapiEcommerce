@@ -14,7 +14,7 @@
 import { HomePageQuery } from '@/strapi/query/homepageQuery'
 
 const graphql = useStrapiGraphQL()
-const result = ref<(null)
+const result = ref(null)
 
 async function fetchData() {
   try {
